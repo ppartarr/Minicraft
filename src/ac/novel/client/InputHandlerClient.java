@@ -61,7 +61,7 @@ public class InputHandlerClient extends InputHandler {
 
 	@Override
 	public void keyPressed(KeyEvent ke) {
-		System.out.println("Sending keypressed event to server");
+		System.out.println("Sending key-press event to server");
 		try {
 			remoteInputHandler.keyPressed(ke.getKeyCode());
 		} catch (RemoteException e) {
@@ -72,6 +72,12 @@ public class InputHandlerClient extends InputHandler {
 
 	@Override
 	public void keyReleased(KeyEvent ke) {
+		System.out.println("Sending key-release event to server");
+		try {
+			remoteInputHandler.keyReleased(ke.getKeyCode());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

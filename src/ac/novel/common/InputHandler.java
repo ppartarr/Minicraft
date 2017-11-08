@@ -57,8 +57,13 @@ public class InputHandler implements KeyListener, InputHandlerInterface {
 	public InputHandler(){}
 
 	public void keyPressed(int keyCode) {
-		System.out.println("keypressed on server");
+		System.out.println("Key pressed on server");
 		toggle(keyCode, true);
+	}
+
+	public void keyReleased(int keyCode) {
+		System.out.println("Key released on server");
+		toggle(keyCode, false);
 	}
 
 	public void keyReleased(KeyEvent ke) {
