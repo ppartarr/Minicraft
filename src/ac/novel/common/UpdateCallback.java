@@ -5,4 +5,5 @@ import java.rmi.RemoteException;
 
 public interface UpdateCallback extends Remote {
     public void update(Save state) throws RemoteException;
+    public void hello() throws RemoteException;
 }

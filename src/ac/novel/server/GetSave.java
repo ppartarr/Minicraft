@@ -20,6 +20,7 @@ public class GetSave implements SaveInterface {
         System.err.println(String.format("Save dump: %d %d %d", result.currentLevel, result.player.x, result.player.y));
 
         game.addCallback(callback);
+        callback.hello();
 		return result;
 	}
 	

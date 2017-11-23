@@ -85,7 +85,12 @@ public class Game extends ac.novel.common.Game {
             System.err.println("Client got remote InputHandler");
             SaveInterface saveStub = (SaveInterface) registry.lookup("GetSave");
 
-            UpdateCallback updateCallback = new UpdateCallback(game);
+            UpdateCallback updateCallback = null;
+            try {
+                updateCallback = new UpdateCallback(game);
+            } catch (Exception e) {
+                // Do nothing.
+            }
             Save savedGame = saveStub.getSave(updateCallback);
             game.playerDeadTime = 0;
             game.wonTimer = 0;
