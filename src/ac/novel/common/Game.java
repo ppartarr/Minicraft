@@ -31,13 +31,13 @@ public abstract class Game extends Canvas implements Runnable {
 	protected boolean running = false;
 	protected Screen screen;
 	protected Screen lightScreen;
-	protected InputHandler input = new InputHandler();
+	public InputHandler input = new InputHandler();
 
 	protected int[] colors = new int[256];
 	public int tickCount = 0;
 	public int gameTime = 0;
 
-	protected Level level;
+	public Level level;
 	public Level[] levels = new Level[5];
 	public int currentLevel = 3;
 	public Player player;

@@ -5,6 +5,6 @@ import java.rmi.RemoteException;
 
 public interface SaveInterface extends Remote {
 	
-	public Save getSave() throws RemoteException;
+	public Save getSave(UpdateCallback callback) throws RemoteException;
 	
 }

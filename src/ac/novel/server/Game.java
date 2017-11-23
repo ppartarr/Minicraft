@@ -4,17 +4,23 @@ import ac.novel.common.InitInterface;
 import ac.novel.common.InputHandler;
 import ac.novel.common.InputHandlerInterface;
 import ac.novel.common.SaveInterface;
+import ac.novel.common.Save;
+import ac.novel.common.UpdateCallback;
 
 import javax.swing.*;
 import java.awt.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class Game extends ac.novel.common.Game {
 	protected static final long serialVersionUID = 2L;
 
     static final String NAME = "Minicraft Server";
+
+    private ArrayList<UpdateCallback> callbacks = new ArrayList<UpdateCallback>();
 
     public static void main(String[] args) {
         Game game = new Game();
@@ -59,5 +65,27 @@ public class Game extends ac.novel.common.Game {
             System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        Save save = new Save(this);
+        ArrayList<UpdateCallback> failedCallbacks = new ArrayList<UpdateCallback>();
+        for (UpdateCallback callback : callbacks) {
+            try {
+                callback.update(save);
+            } catch (RemoteException e) {
+                failedCallbacks.add(callback);
+            }
+        }
+
+        for (UpdateCallback callback : failedCallbacks) {
+            callbacks.remove(callback);
+        }
+    }
+
+    public void addCallback(UpdateCallback callback) {
+        callbacks.add(callback);
     }
 }

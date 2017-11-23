@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class Game extends ac.novel.common.Game {
 	protected static final long serialVersionUID = 3L;
-//	private InputHandlerClient input;
 
     public void start(InputHandlerClient inputHandlerClient) {
         running = true;
@@ -86,19 +85,11 @@ public class Game extends ac.novel.common.Game {
             System.err.println("Client got remote InputHandler");
             SaveInterface saveStub = (SaveInterface) registry.lookup("GetSave");
 
-            Save savedGame = saveStub.getSave();
+            UpdateCallback updateCallback = new UpdateCallback(game);
+            Save savedGame = saveStub.getSave(updateCallback);
             game.playerDeadTime = 0;
             game.wonTimer = 0;
-            game.gameTime = savedGame.gameTime;
-            game.hasWon = savedGame.hasWon;
-
-            game.levels = savedGame.levels;
-            game.currentLevel = savedGame.currentLevel;
-
-            game.level = game.levels[game.currentLevel];
-            game.player = savedGame.player;
-            game.player.game = game;
-            game.player.input = inputHandlerClient;
+            updateCallback.update(savedGame);
 
             game.start(inputHandlerClient);
             game.setMenu(null);
