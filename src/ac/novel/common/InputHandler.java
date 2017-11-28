@@ -20,10 +20,8 @@ public class InputHandler implements KeyListener, InputHandlerInterface {
             if (pressed) {
                 clients++;
             } else {
-                clients--;
+                clients = max(0, clients - 1);
             }
-
-            assert(clients >= 0);
 
             toggle(pressed);
         }
