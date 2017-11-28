@@ -20,7 +20,7 @@ public class InputHandler implements KeyListener, InputHandlerInterface {
             if (pressed) {
                 clients++;
             } else {
-                clients = max(0, clients - 1);
+                clients = Math.max(0, clients - 1);
             }
 
             toggle(pressed);
