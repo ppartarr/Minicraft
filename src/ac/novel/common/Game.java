@@ -237,8 +237,6 @@ public abstract class Game extends Canvas implements Runnable {
 
 		renderGui();
 
-		//if (!hasFocus()) renderFocusNagger();
-
 		for (int y = 0; y < screen.h; y++) {
 			for (int x = 0; x < screen.w; x++) {
 				int cc = screen.pixels[x + y * screen.w];

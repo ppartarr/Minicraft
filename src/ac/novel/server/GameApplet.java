@@ -26,7 +26,6 @@ public class GameApplet extends Applet {
 			game.addKeyListener(obj);
 			InputHandlerInterface stub = (InputHandlerInterface) UnicastRemoteObject.exportObject(obj, 1234);
 
-			// Bind the remote object's stub in the registry
 			Registry registry = LocateRegistry.getRegistry();
 			registry.bind("InputHandler", stub);
 			System.err.println("Server ready");

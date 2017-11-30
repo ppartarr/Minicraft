@@ -34,11 +34,8 @@ public class Game extends ac.novel.common.Game {
         frame.setVisible(true);
 
         try {
-//            game.setMenu(null);
             game.start();
             int port = 1234;
-            // Bind the remote object's stub in the registry
-//			Naming.rebind("rmi://localhost:" + port + "/InputHandler", obj);
 
             InputHandlerInterface stub = (InputHandlerInterface) UnicastRemoteObject.exportObject(game.input, port);
             Registry reg = LocateRegistry.createRegistry(port);

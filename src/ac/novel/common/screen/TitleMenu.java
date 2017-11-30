@@ -38,8 +38,6 @@ public class TitleMenu extends Menu {
 		int h = 14;
 		int w = 18;
 		int titleColor = Color.get(0, 400, 500, 555);
-//		int xo = (screen.w - w * 8) / 2; // X offset
-//		int yo = 24;  // Y offset
 		int xo = 7; // X offset
 		int yo = -1;  // Y offset
 		for (int y = 0; y < h; y++) {
