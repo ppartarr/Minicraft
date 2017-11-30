@@ -1,6 +1,9 @@
 package ac.novel.client;
 
 import ac.novel.common.InputHandlerInterface;
+import ac.novel.common.InputHandler;
+import ac.novel.common.screen.TitleMenu;
+import ac.novel.client.screen.ConnectMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,11 +13,18 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class Game extends ac.novel.common.Game {
-
+    
+    static final String NAME = "Novelcraft";
+    
     public void start(InputHandlerInterface inputHandlerServerInterface) {
         running = true;
         input = new InputHandlerClient(inputHandlerServerInterface);
         this.addKeyListener(input);
+        new Thread(this).start();
+    }
+
+    public void startTest() {
+        running = true;
         new Thread(this).start();
     }
 
@@ -38,17 +48,34 @@ public class Game extends ac.novel.common.Game {
         String reg_host = "localhost";
         int reg_port = 1234;
 
+        game.startTest();
+        System.err.println("Game Started");
+    }
+
+    public void startController(String reg_host) {
+        int reg_port = 1234;
         try {
             Registry registry = LocateRegistry.getRegistry(reg_host,reg_port);
             InputHandlerInterface stub = (InputHandlerInterface) registry.lookup("InputHandler");
             System.err.println("Client got remote InputHandler");
-            game.start(stub);
-            System.err.println("Game Started");
+
+            input = new InputHandlerClient(stub);
+            addKeyListener(input);
+
+            setMenu(new TitleMenu());
         } catch (NotBoundException e) {
             e.printStackTrace();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void init() {
+        super.init();
+        ConnectMenu menu = new ConnectMenu();
+        setMenu(menu);
+        addKeyListener(menu);
     }
 
     @Override

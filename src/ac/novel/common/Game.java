@@ -22,7 +22,7 @@ import java.util.Random;
 public abstract class Game extends Canvas implements Runnable {
 	protected static final long serialVersionUID = 1L;
 	protected Random random = new Random();
-	public static final String NAME = "Minicraft";
+	public static final String NAME = "Novelcraft";
 	public static final int HEIGHT = 120;
 	public static final int WIDTH = 160;
 	protected static final int SCALE = 3;
