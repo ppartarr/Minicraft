@@ -16,7 +16,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class Game extends ac.novel.common.Game {
 
-    static final String NAME = "Minicraft Server";
+    static final String NAME = "Novelcraft Server";
 
     public static void main(String[] args) {
         Game game = new Game();

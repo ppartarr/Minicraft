@@ -13,7 +13,9 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class Game extends ac.novel.common.Game {
-
+    
+    static final String NAME = "Novelcraft";
+    
     public void start(InputHandlerInterface inputHandlerServerInterface) {
         running = true;
         input = new InputHandlerClient(inputHandlerServerInterface);
