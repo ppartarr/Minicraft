@@ -60,6 +60,7 @@ public class ConnectMenu extends Menu implements KeyListener {
         } else if (c == 10) { // ENTER
             if (game instanceof ac.novel.client.Game) {
                 ac.novel.client.Game clientGame = (ac.novel.client.Game) game;
+                clientGame.removeKeyListener(this);
                 clientGame.startController(hostname);
             }
         } else {
